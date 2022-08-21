@@ -4,7 +4,7 @@ import axios from 'axios'
 function App() {
   
   const base = "https://covidnigeria.herokuapp.com/api";
-  const meme = "https://jsonplaceholder.typicode.com/posts";
+
   let newdata = {};
   const [data, setData] = useState(null);
 
@@ -12,21 +12,20 @@ function App() {
   axios.get(base)
   .then(res => {
     console.log(res)
-    newdata = JSON.stringify(res.data.keys())
+    newdata = JSON.stringify(res.data)
     setData((newdata))
-    console.log(newdata)
     console.log(data)
   })
   .catch(err => {console.log(err)})
 
-  document.querySelector('.apidata').innerText = newdata;
+  document.querySelector('.apidata').innerHTML = data;
  }
 
   return (
     <div className="App">
       <button onClick={getData}>Grab API data </button>
 
-      <h1 className="apidata">{Object.values(newdata)}</h1>
+      <h1 className="apidata"></h1>
     </div>
   )
 
